@@ -7,18 +7,44 @@
 package day07;
 
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class GuessingGame {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		char[] chs = generate();
+		char[] chs = null;
 		char[] input = null;
 		int[] res = null;
 		int count = 0;
+		boolean jump = false;
 		System.out
 				.println("Welcome to letter guessing game, please input 5 letters");
+
+		do {
+			System.out.println("Please input the size of the game, 7, 8, 9");
+			int arrayLength = scan.nextInt();
+			switch (arrayLength) {
+			case 1:
+				arrayLength = 7;
+				jump = true;
+				break;
+			case 2:
+				arrayLength = 8;
+				jump = true;
+				break;
+			case 3:
+				arrayLength = 9;
+				jump = true;
+				break;
+			default:
+				jump = false;
+			}
+			chs = generate(arrayLength);
+
+		} while (jump);
+
+		System.out.println("Please input " + chs.length + " letters.");
 		while (true) {
+
 			String inputStr = scan.next().toUpperCase();
 			if ("EXIT".equals(inputStr)) {
 				System.out
@@ -33,9 +59,9 @@ public class GuessingGame {
 						+ score);
 			} else {
 				count++;
-				System.out.println("You guess right " + res[0] + " letters and "
-						+ res[1] + " positions. (Total try: " + count
-						+ " times, type 'exit' to quit)");
+				System.out.println("You guess right " + res[0]
+						+ " letters and " + res[1] + " positions. (Total try: "
+						+ count + " times, type 'exit' to quit)");
 			}
 		}
 		scan.close();
@@ -59,8 +85,8 @@ public class GuessingGame {
 	}
 
 	// generate() to generate 5 random letters that for use to guess
-	public static char[] generate() {
-		char[] chr = new char[5];
+	public static char[] generate(int arrayLength) {
+		char[] chr = new char[arrayLength];
 		char[] letters = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
 				'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
 				'U', 'V', 'W', 'X', 'Y', 'Z' };
